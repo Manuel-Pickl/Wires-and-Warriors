@@ -1,6 +1,6 @@
 # Wires and Warriors
 
-### Bei WnW handelt es sich um ein rotierendes Metalldraht Labyrinth mit visuellem und A.
+### Bei WnW handelt es sich um ein rotierendes Heißes-Draht Spiel mit visuellem und auditivem Feedback.
 
 Das Spiel wird simultan und kooperativ von zwei Spielern gespielt. Ihr Ziel besteht darin, einen Metallring durch ein Labyrinth zu manövrieren, ohne den Metalldraht zu berühren, da dies zum Verlust eines Lebens führt.
 
