@@ -248,7 +248,7 @@ void checkSystemTouch() {
 void playGame() {
     for (int i = 1; i <= 7; i++) {
         playSound(i);
-        delay(2500);
+        delay(5000);
     }
     // playSound(Sound::Start);
 

@@ -17,6 +17,9 @@ int getMotorDelay(int level) {
             return 10000;
         case 3:
             return 2000;
+
+        default:
+            return 0;
     }
 }
 
