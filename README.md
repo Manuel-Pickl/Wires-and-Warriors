@@ -1,6 +1,9 @@
 # Wires and Warriors
 
-### Bei WW handelt es sich um ein rotierendes Metalldraht Labyrinth mit visueller und auditive Ausgabe.
+### Bei WnW handelt es sich um ein rotierendes Metalldraht Labyrinth mit visuellem und A.
 
-Gespielt wird alleine oder zu zweit. Wobei ein Spieler versucht, seinen Metallring durch das Labyrinth zu bewegen ohne den Metalldraht zu berühren.
-Die Aufgaben des zweiten Spielers liegen darin, die Rotation und Geschwindigkeit des Labyrinths zu steuern.
+Das Spiel wird simultan und kooperativ von zwei Spielern gespielt. Ihr Ziel besteht darin, einen Metallring durch ein Labyrinth zu manövrieren, ohne den Metalldraht zu berühren, da dies zum Verlust eines Lebens führt.
+
+Der Fortschritt erfolgt durch das Absolvieren von immer anspruchsvolleren Levels, bei denen die Spieler ihre Leben auffüllen, sobald sie ein Level erfolgreich abschließen.
+
+Um ein Level abzuschließen, müssen die Spieler von ihrem jeweiligen Abschnitt des Labyrinths an ihrem Mitspieler vorbei zur anderen Seite gelangen.
