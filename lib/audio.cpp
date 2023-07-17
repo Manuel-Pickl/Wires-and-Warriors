@@ -4,13 +4,11 @@ SoftwareSerial mySoftwareSerial(10, 11); // RX, TX
 DFRobotDFPlayerMini myDFPlayer;
 
 enum class Sound {
-    LevelStartSingle,
-    LevelStartDouble,
-    LevelFinish,
     VoiceStart,
-    VoiceFinish,
+    HeartsReplenished,
     HeartLost,
-    GameOver
+    GameOver,
+    VoiceFinish
 };
 
 void initializeAudio() {
@@ -36,37 +34,36 @@ void initializeAudio() {
 int getSoundIndex(Sound sound) {
     switch (sound)
     {
-        case Sound::LevelStartSingle:
+        case Sound::VoiceStart:
           return 1;
 
-        case Sound::LevelStartDouble:
+        case Sound::HeartsReplenished:
            return 2;
 
-        case Sound::VoiceStart:
-          return 3;
+        case Sound::HeartLost:
+            return 3;
 
-        case Sound::LevelFinish:
+        case Sound::GameOver:
             return 4;
 
         case Sound::VoiceFinish:
             return 5;
-
-        case Sound::HeartLost:
-            return 6;
-
-        case Sound::GameOver:
-            return 7;
 
         default:
             return 0;
     }
 }
 
-void playSound(Sound sound) {
-    int soundIndex = getSoundIndex(sound);
+void playSound(int soundIndex) {
+    // play audio file at index
+    // -> index gets assigned on copy to sd card)
     myDFPlayer.play(soundIndex);
+
+    // delay for program stability
+    delay(100);
 }
 
-void playSound(int soundIndex) {
-    myDFPlayer.play(soundIndex);
+void playSound(Sound sound) {
+    int soundIndex = getSoundIndex(sound);
+    playSound(soundIndex);
 }

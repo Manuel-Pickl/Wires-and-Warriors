@@ -54,6 +54,7 @@ void setup() {
   setOutputPinModes();
 
   initializeGame();
+  initializeAudio();
 
   Serial.println("game initialized");
 }

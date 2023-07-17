@@ -12,8 +12,10 @@
 #pragma region Variables
 
 int cycle;
-unsigned int lastError;
 unsigned int gameStart;
+
+unsigned int lastError;
+unsigned int lastSoundLevelStartSingle = 0;
 
 int level;
 
@@ -36,12 +38,12 @@ void initializeGame() {
 
     level = startingLevel;
 
-    playerHearts = 3;
+    playerHearts = playerStartingHearts;
     heartsChanged = false;
 
     gameStarted = false;
 
-    initializeAudio();
+    // initializeAudio();
 }
 
 void showHeartsWithMessage(String message) {
@@ -69,7 +71,11 @@ bool playersHaveErrorCooldown() {
 
 #pragma region Player Hearts
 
-void finishGame(uint32_t color) {
+void finishGame(bool success) {
+    Sound sound = success ? Sound::VoiceFinish : Sound::GameOver;
+    playSound(sound);
+
+    uint32_t color = success ? green : red;
     for(int i = 0; i < lifeLEDsCount * 3; i++) 
     {
         int ledIndex = i % lifeLEDsCount;
@@ -86,11 +92,12 @@ void removePlayerHeart() {
     playerHearts--;
     if (playerHearts <= 0) {
         Serial.println("You lost!");
-        finishGame(red);
+        finishGame(false);
     }
-    
-    heartsChanged = true;
-    showHeartsWithMessage("Heart lost!");
+    else {
+        heartsChanged = true;
+        showHeartsWithMessage("Heart lost!");
+    }
 }
 
 void flashLEDsForError() {
@@ -144,6 +151,9 @@ void startLevel() {
     playerHearts = playerStartingHearts;
     heartsChanged = true;
     showHeartsWithMessage("Hearts replenished!");
+    
+    playSound(Sound::HeartsReplenished);
+    delay(2000); // delay for definite audio finish
 
     gameStarted = true;
     gameStart = millis();
@@ -156,7 +166,7 @@ void finishLevel() {
 
     if (level == 3) {
         Serial.println("You made it!");
-        finishGame(green);
+        finishGame(true);
     }
     else {
         level++;
@@ -182,7 +192,10 @@ bool playerTouchesPin(int pin) {
 void checkStartTouch() {
     if (!gameStarted
         && playerTouchesPin(currentButtonLeftPin)
-        && playerTouchesPin(currentButtonRightPin)) {
+        // && playerTouchesPin(currentButtonRightPin)) {
+        && true) {
+        playSound(Sound::VoiceStart);
+        delay(1800);
         startLevel();
     }
 }
@@ -190,7 +203,8 @@ void checkStartTouch() {
 void checkEndTouch() {
     if (isFinishAllowed()
         && playerTouchesPin(currentButtonLeftPin)
-        && playerTouchesPin(currentButtonRightPin)) {
+        // && playerTouchesPin(currentButtonRightPin)) {
+        && true) {
         finishLevel();
     }
 }
@@ -201,6 +215,7 @@ void checkWireTouch() {
         && !playersHaveErrorCooldown()) {
         setError();
         removePlayerHeart();
+        playSound(Sound::HeartLost);
     }
 }
 
@@ -217,6 +232,11 @@ void toggleStartLEDs() {
         {
             pixels.setPixelColor(i, green);
         }
+
+        // if (millis() - lastSoundLevelStartSingle > 5000) {
+            // lastSoundLevelStartSingle = millis();
+            // playSound(Sound::LevelStartSingle);
+        // }
     }
 
     if (playerTouchesPin(currentButtonRightPin)) {
@@ -246,12 +266,6 @@ void checkSystemTouch() {
 #pragma region Play
 
 void playGame() {
-    for (int i = 1; i <= 7; i++) {
-        playSound(i);
-        delay(5000);
-    }
-    // playSound(Sound::Start);
-
     // turn motor and check for system touches while turning
     for(int step = 0; step < getMotorSteps(level); step++) {
         checkSystemTouch();
