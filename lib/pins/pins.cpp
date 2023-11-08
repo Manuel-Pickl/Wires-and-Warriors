@@ -1,3 +1,5 @@
+#include "pins.h"
+
 // motor wires
 extern const int stepPinWire = 9;
 

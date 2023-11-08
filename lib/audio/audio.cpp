@@ -1,32 +1,24 @@
-#include "DFRobotDFPlayerMini.h"
+#include "audio.h"
 
 SoftwareSerial mySoftwareSerial(10, 11); // RX, TX
 DFRobotDFPlayerMini myDFPlayer;
 
-enum class Sound {
-    VoiceStart,
-    HeartsReplenished,
-    HeartLost,
-    GameOver,
-    VoiceFinish
-};
-
 void initializeAudio() {
     mySoftwareSerial.begin(9600);
   
-    Serial.println();
-    Serial.println(F("DFRobot DFPlayer Mini Demo"));
-    Serial.println(F("Initializing DFPlayer ... (May take 3~5 seconds)"));
+    log("Initializing DFPlayer ... (May take 3~5 seconds)");
     
-    if (!myDFPlayer.begin(mySoftwareSerial)) {  //Use softwareSerial to communicate with mp3.
-        Serial.println(F("Unable to begin:"));
-        Serial.println(F("1.Please recheck the connection!"));
-        Serial.println(F("2.Please insert the SD card!"));
-        while(true){
-        delay(0); // Code to compatible with ESP8266 watch dog.
+    if (!myDFPlayer.begin(mySoftwareSerial)) {
+        log("Unable to begin:");
+        log("1.Please recheck the connection!");
+        log("2.Please insert the SD card!");
+
+        while(true) {
+            delay(0);
         }
     }
-    Serial.println(F("DFPlayer Mini online."));
+    
+    log("DFPlayer Mini online.");
     
     myDFPlayer.volume(volumne);  //Set volume value. From 0 to 30
 }

@@ -1,17 +1,13 @@
 #pragma region Includes
 
+#include "../lib/game/game.h"
+#include "../lib/pins/pins.h"
+
+#include <Adafruit_NeoPixel.h>
 #include <Arduino.h>
 #include "SoftwareSerial.h"
 
-#include "../lib/pins.cpp"
-#include "../lib/game.cpp"
-#include <Adafruit_NeoPixel.h>
-
 #pragma endregion Includes
-
-#pragma region Variables
-
-#pragma endregion Variables
 
 #pragma region Setup
 
@@ -54,9 +50,9 @@ void setup() {
   setOutputPinModes();
 
   initializeGame();
-  initializeAudio();
+  // initializeAudio();
 
-  Serial.println("game initialized");
+  log("game initialized");
 }
 
 void loop() {

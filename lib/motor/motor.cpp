@@ -1,3 +1,5 @@
+#include "motor.h"
+
 int getMotorSteps(int level) {
     switch (level) {
         case 1:
@@ -25,7 +27,7 @@ int getMotorDelay(int level) {
 
 void turnMotor(int level) {
     // turn motor one step
-    digitalWrite(stepPinWire,HIGH);
+    digitalWrite(stepPinWire, HIGH);
     delayMicroseconds(getMotorDelay(level));
-    digitalWrite(stepPinWire,LOW);
+    digitalWrite(stepPinWire, LOW);
 }

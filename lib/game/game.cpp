@@ -1,13 +1,4 @@
-#pragma region Includes
-
-#include <Arduino.h>
-#include <Adafruit_NeoPixel.h>
-
-#include "motor.cpp"
-#include "constants.cpp"
-#include "audio.cpp"
-
-#pragma endregion Includes
+#include "game.h"
 
 #pragma region Variables
 
@@ -47,12 +38,8 @@ void initializeGame() {
 }
 
 void showHeartsWithMessage(String message) {
-    Serial.print(message);
-    Serial.print(" (");
-    Serial.print(playerHearts);
-    Serial.print("/");
-    Serial.print(playerStartingHearts);
-    Serial.println(")");
+    String messageWithHearts = message + " (" + playerHearts + "/" + playerStartingHearts + ")";
+    log(messageWithHearts);
 }
 
 #pragma region Errors 
@@ -91,7 +78,7 @@ void finishGame(bool success) {
 void removePlayerHeart() {
     playerHearts--;
     if (playerHearts <= 0) {
-        Serial.println("You lost!");
+        log("You lost!");
         finishGame(false);
     }
     else {
@@ -144,9 +131,7 @@ void toggleHeartLEDs() {
 #pragma region Levels
 
 void startLevel() {
-    Serial.print("Level ");
-    Serial.print(level);
-    Serial.println(" started");
+    log("Level " + String(level) + " started");
 
     playerHearts = playerStartingHearts;
     heartsChanged = true;
@@ -160,12 +145,10 @@ void startLevel() {
 }
 
 void finishLevel() {
-    Serial.print("Level ");
-    Serial.print(level);
-    Serial.println(" finished");
-
+    log("Level " + String(level) + " finished");
+    
     if (level == 3) {
-        Serial.println("You made it!");
+        log("You made it!");
         finishGame(true);
     }
     else {
@@ -193,7 +176,8 @@ void checkStartTouch() {
     if (!gameStarted
         && playerTouchesPin(currentButtonLeftPin)
         // && playerTouchesPin(currentButtonRightPin)) {
-        && true) {
+        && true)
+    {
         playSound(Sound::VoiceStart);
         delay(1800);
         startLevel();
