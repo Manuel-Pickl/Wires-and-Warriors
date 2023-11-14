@@ -50,7 +50,7 @@ void setup() {
   setOutputPinModes();
 
   initializeGame();
-  // initializeAudio();
+  initializeAudio();
 
   log("game initialized");
 }
