@@ -26,8 +26,26 @@ int getMotorDelay(int level) {
 }
 
 void turnMotor(int level) {
-    // turn motor one step
+    // turn side motors one step
     digitalWrite(stepPinWire, HIGH);
     delayMicroseconds(getMotorDelay(level));
     digitalWrite(stepPinWire, LOW);
+}
+
+int tickCounter = 0;
+void turnBridge() {
+    tickCounter++;
+
+    if (tickCounter >= 3500) {
+        // Toggle the direction of the motor
+        digitalWrite(directionPinBridge, !digitalRead(directionPinBridge));
+
+        // Reset the tick counter
+        tickCounter = 0;
+    }
+
+    // turn bridge motor one step
+    digitalWrite(stepPinBridge, HIGH);
+    delayMicroseconds(3000);
+    digitalWrite(stepPinBridge, LOW);
 }

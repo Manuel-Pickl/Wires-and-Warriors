@@ -24,8 +24,6 @@ void initializeGame() {
     heartsChanged = false;
 
     gameStarted = false;
-
-    // initializeAudio();
 }
 
 
@@ -37,6 +35,10 @@ void playGame() {
     }
 
     tick();
+
+    // if (gameStarted) {
+        turnBridge();
+    // }
 }
 
 void showHeartsWithMessage(String message) {

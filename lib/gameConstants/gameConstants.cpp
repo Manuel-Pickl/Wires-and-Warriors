@@ -15,7 +15,7 @@ const int flashsPerError = 3;
 
 const int earliestFinishTime = 1000; // milliseconds
 
-const int volume = 30; // 0-30
+const int volume = 20; // 0-30
 
 
 // debug

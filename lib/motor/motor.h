@@ -7,5 +7,6 @@
 int getMotorSteps(int level);
 int getMotorDelay(int level);
 void turnMotor(int level);
+void turnBridge();
 
 #endif // MOTOR_H

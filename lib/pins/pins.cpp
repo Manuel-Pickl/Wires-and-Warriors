@@ -4,8 +4,8 @@
 extern const int stepPinWire = 9;
 
 // motor bridge
-extern const int stepPinBridge = 12;
-extern const int directionPinBridge = 13;
+extern const int directionPinBridge = 12;
+extern const int stepPinBridge = 13;
 
 // current buttons
 extern const int currentButtonLeftPin = 2;

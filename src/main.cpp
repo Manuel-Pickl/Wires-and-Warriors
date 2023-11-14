@@ -25,8 +25,10 @@ void setInputPinModes() {
 }
 
 void setOutputPinModes() {
-    // motor wire
+    // motor wires
     pinMode(stepPinWire, OUTPUT);
+    pinMode(stepPinBridge, OUTPUT);
+    pinMode(directionPinBridge, OUTPUT);
 }
 
 void setup() {
