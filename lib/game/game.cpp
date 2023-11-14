@@ -110,7 +110,10 @@ bool isFinishAllowed() {
 void tick() {
     cycle++;
 
+    toggleLights();
+
     if (checkStartTouch()) {
+        toggleLights();
         playSound(Sound::VoiceStart);
         delay(1800);
         startLevel();
@@ -125,8 +128,6 @@ void tick() {
     if (checkEndTouch()) {
         finishLevel();
     }
-
-    toggleLights();
 }
 
 #pragma region touch
@@ -211,7 +212,7 @@ void toggleStartingLights() {
 
     if (playerTouchesPin(currentButtonRightPin)) {
         // second half of life leds
-        for(int i = lifeLEDsCount / 2; i < lifeLEDsCount; i++) {
+        for(int i = 0; i < (lifeLEDsCount / 2); i++) {
             pixels.setPixelColor(i + 3, green);
         }
     }

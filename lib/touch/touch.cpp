@@ -5,7 +5,6 @@ bool playerTouchesPin(int pin) {
 }
 
 bool bothPlayersTouchRing() {
-    // return playerTouchesPin(currentButtonLeftPin) 
-    //     && playerTouchesPin(currentButtonRightPin);
-    return playerTouchesPin(currentButtonRightPin);
+    return playerTouchesPin(currentButtonLeftPin) 
+        && playerTouchesPin(currentButtonRightPin);
 }

@@ -8,8 +8,8 @@ const int playerStartingHearts = 6;
 const int lifeLEDsCount = 6;
 
 // error
-const int errorCooldown = 2000;
-const int flashsPerError = 4;
+const int errorCooldown = 1000;
+const int flashsPerError = 3;
 // error flash color:
 // -> game.cpp > flashLEDsForError() > pixels.setPixelColor(i, white);
 
