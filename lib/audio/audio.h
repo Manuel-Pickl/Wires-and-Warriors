@@ -21,5 +21,6 @@ void initializeAudio();
 int getSoundIndex(Sound sound);
 void playSound(int soundIndex);
 void playSound(Sound sound);
+void playFinishSound(bool success);
 
 #endif // AUDIO_H

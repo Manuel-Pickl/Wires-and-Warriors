@@ -20,7 +20,7 @@ void initializeAudio() {
     
     log("DFPlayer Mini online.");
     
-    myDFPlayer.volume(volumne);  //Set volume value. From 0 to 30
+    myDFPlayer.volume(volume);  //Set volume value. From 0 to 30
 }
 
 int getSoundIndex(Sound sound) {
@@ -58,4 +58,9 @@ void playSound(int soundIndex) {
 void playSound(Sound sound) {
     int soundIndex = getSoundIndex(sound);
     playSound(soundIndex);
+}
+
+void playFinishSound(bool success) {
+    Sound sound = success ? Sound::VoiceFinish : Sound::GameOver;
+    playSound(sound);
 }
