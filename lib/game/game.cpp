@@ -31,14 +31,18 @@ void playGame() {
     // turn motor and check for system touches while turning
     for(int step = 0; step < getMotorSteps(level); step++) {
         tick();
-        turnMotor(level);
+
+        if (gameStarted) {
+            // turnBridge();
+            turnMotor(level);
+        }
     }
 
     tick();
 
-    // if (gameStarted) {
+    if (gameStarted) {
         turnBridge();
-    // }
+    }
 }
 
 void showHeartsWithMessage(String message) {
@@ -199,27 +203,16 @@ void toggleHeartLights() {
 }
 
 void toggleStartingLights() {
-    if (gameStarted) {
-        return;
-    }
-
-    pixels.clear();
-    
+    digitalWrite(leftLEDPin, LOW);
+    digitalWrite(rightLEDPin, LOW);
+ 
     if (playerTouchesPin(currentButtonLeftPin)) {
-        // first half of life leds
-        for(int i = 0; i < (lifeLEDsCount / 2); i++) {
-            pixels.setPixelColor(i, green);
-        }
+        digitalWrite(leftLEDPin, HIGH);
     }
 
     if (playerTouchesPin(currentButtonRightPin)) {
-        // second half of life leds
-        for(int i = 0; i < (lifeLEDsCount / 2); i++) {
-            pixels.setPixelColor(i + 3, green);
-        }
+        digitalWrite(rightLEDPin, HIGH);
     }
-    
-    pixels.show();
 }
 
 #pragma endregion lights

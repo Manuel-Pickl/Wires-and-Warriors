@@ -15,4 +15,6 @@ extern const int currentButtonRightPin = 3;
 extern const int wirePin = 4;
 
 // life leds
-extern const int lifeLEDsPin = 6;
+extern const int lifeLEDsPin = 7;
+extern const int leftLEDPin = 8;
+extern const int rightLEDPin = 5;

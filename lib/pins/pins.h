@@ -15,7 +15,9 @@ extern const int currentButtonRightPin;
 // wire
 extern const int wirePin;
 
-// life leds
+// leds
 extern const int lifeLEDsPin;
+extern const int leftLEDPin;
+extern const int rightLEDPin;
 
 #endif // PINS_H

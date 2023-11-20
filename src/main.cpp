@@ -29,6 +29,8 @@ void setOutputPinModes() {
     pinMode(stepPinWire, OUTPUT);
     pinMode(stepPinBridge, OUTPUT);
     pinMode(directionPinBridge, OUTPUT);
+    pinMode(leftLEDPin, OUTPUT);
+    pinMode(rightLEDPin, OUTPUT);
 }
 
 void setup() {
