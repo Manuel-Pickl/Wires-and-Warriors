@@ -41,6 +41,9 @@ int getSoundIndex(Sound sound) {
         case Sound::VoiceFinish:
             return 5;
 
+        case Sound::Code:
+            return 6;
+
         default:
             return 0;
     }

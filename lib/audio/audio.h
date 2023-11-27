@@ -11,7 +11,8 @@ enum class Sound {
     HeartsReplenished,
     HeartLost,
     GameOver,
-    VoiceFinish
+    VoiceFinish,
+    Code
 };
 
 extern SoftwareSerial mySoftwareSerial;

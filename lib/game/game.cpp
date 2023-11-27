@@ -63,6 +63,9 @@ bool playersHaveErrorCooldown() {
 void finishGame(bool success) {
     playFinishSound(success);
     showFinishLighting(success);
+    if (success) {
+        playSound(Sound::Code);
+    }
 
     initializeGame();
 }
