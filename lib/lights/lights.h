@@ -14,5 +14,6 @@ extern uint32_t white;
 void showHeartLights(int playerHeartCount);
 void showErrorLights(int lastError);
 void showFinishLighting(bool success);
+void showDefaultLights();
 
 #endif // LIGHTS_H

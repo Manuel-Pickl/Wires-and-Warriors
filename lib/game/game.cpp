@@ -24,6 +24,8 @@ void initializeGame() {
     heartsChanged = false;
 
     gameStarted = false;
+    
+    showDefaultLights();
 }
 
 

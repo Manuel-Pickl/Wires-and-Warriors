@@ -32,12 +32,21 @@ void showErrorLights(int lastError) {
 
 void showFinishLighting(bool success) {
     uint32_t color = success ? green : red;
-    for(int i = 0; i < lifeLEDsCount * 3; i++) 
+    const int cycles = 5;
+    for(int i = 0; i < lifeLEDsCount * cycles; i++) 
     {
         int ledIndex = i % lifeLEDsCount;
         pixels.clear();
         pixels.setPixelColor(ledIndex, color);
         pixels.show();
-        delay(50);
+        delay(100);
     }
+}
+
+void showDefaultLights() {
+    for(int i = 0; i < lifeLEDsCount; i++) 
+    {
+        pixels.setPixelColor(i, white);
+    }
+    pixels.show();
 }
