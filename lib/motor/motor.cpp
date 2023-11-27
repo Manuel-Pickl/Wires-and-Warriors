@@ -36,7 +36,8 @@ int tickCounter = 0;
 void turnBridge() {
     tickCounter++;
 
-    if (tickCounter >= 3500) {
+    const int pulsesForFullRotation = 6400;
+    if (tickCounter >= pulsesForFullRotation) {
         // Toggle the direction of the motor
         digitalWrite(directionPinBridge, !digitalRead(directionPinBridge));
 
