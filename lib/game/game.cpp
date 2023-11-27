@@ -35,7 +35,7 @@ void playGame() {
         tick();
 
         if (gameStarted) {
-            // turnBridge();
+            turnBridge();
             turnMotor(level);
         }
     }
