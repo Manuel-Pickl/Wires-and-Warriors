@@ -3,6 +3,7 @@
 
 #include "../gameConstants/gameConstants.h"
 #include "../pins/pins.h"
+#include "../touch/touch.h"
 
 #include <Adafruit_NeoPixel.h>
 
@@ -11,9 +12,10 @@ extern uint32_t green;
 extern uint32_t red;
 extern uint32_t white;
 
-void showHeartLights(int playerHeartCount);
-void showErrorLights(int lastError);
+void showGameNotStarted();
+void showHearts(int playerHeartCount);
+void showError(int lastError);
 void showFinishLighting(bool success);
-void showDefaultLights();
+void showRingLights();
 
 #endif // LIGHTS_H

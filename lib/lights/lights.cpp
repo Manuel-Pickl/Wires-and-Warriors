@@ -5,7 +5,7 @@ uint32_t green = pixels.Color(150, 0, 0);
 uint32_t red = pixels.Color(0, 150, 0);
 uint32_t white = pixels.Color(150, 150, 150);
 
-void showHeartLights(int playerHeartCount) {
+void showHearts(int playerHeartCount) {
     pixels.clear(); // Set all pixel colors to 'off'
     for(int i = 0; i < playerHeartCount; i++) 
     {
@@ -14,7 +14,8 @@ void showHeartLights(int playerHeartCount) {
     pixels.show();  // Send the updated pixel colors to the hardware.
 }
 
-void showErrorLights(int lastError) {
+void showError(int lastError) {
+
     int elapsedTime = millis() - lastError;
     int intervalTime = errorCooldown / (flashsPerError * 2);
     int currentInterval = elapsedTime / intervalTime;
@@ -43,10 +44,23 @@ void showFinishLighting(bool success) {
     }
 }
 
-void showDefaultLights() {
+void showGameNotStarted() {
     for(int i = 0; i < lifeLEDsCount; i++) 
     {
         pixels.setPixelColor(i, white);
     }
     pixels.show();
+}
+
+void showRingLights() {
+    digitalWrite(leftLEDPin, LOW);
+    digitalWrite(rightLEDPin, LOW);
+ 
+    if (playerTouchesPin(currentButtonLeftPin)) {
+        digitalWrite(leftLEDPin, HIGH);
+    }
+
+    if (playerTouchesPin(currentButtonRightPin)) {
+        digitalWrite(rightLEDPin, HIGH);
+    }
 }

@@ -36,8 +36,8 @@ bool checkStartTouch();
 bool checkEndTouch();
 bool checkWireTouch();
 
-void toggleLights();
-void toggleHeartLights();
-void toggleStartingLights();
+void showHeartLights();
+void showHeartLights();
+void showRingLights();
 
 #endif // GAME_H

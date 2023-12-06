@@ -17,33 +17,17 @@ void initializeGame() {
     cycle = 0;
     lastError = -1 * errorCooldown;
     gameStart = 0;
-
     level = startingLevel;
-
     playerHeartCount = playerStartingHearts;
-    heartsChanged = false;
-
     gameStarted = false;
-    
-    showDefaultLights();
 }
 
-
 void playGame() {
-    // turn motor and check for system touches while turning
-    for(int step = 0; step < getMotorSteps(level); step++) {
-        tick();
-
-        if (gameStarted) {
-            turnBridge();
-            turnMotor(level);
-        }
-    }
-
     tick();
-
+    
     if (gameStarted) {
         turnBridge();
+        turnMotor(level);
     }
 }
 
@@ -58,7 +42,7 @@ void setError() {
 }
 
 bool playersHaveErrorCooldown() {
-    int elapsedTimeSinceError = millis() - lastError;
+    long elapsedTimeSinceError = millis() - lastError;
     return elapsedTimeSinceError < errorCooldown;
 }
 
@@ -79,7 +63,6 @@ void removePlayerHeart() {
         finishGame(false);
     }
     else {
-        heartsChanged = true;
         showHeartsWithMessage("Heart lost!");
     }
 }
@@ -88,7 +71,6 @@ void startLevel() {
     log("Level " + String(level) + " started");
 
     playerHeartCount = playerStartingHearts;
-    heartsChanged = true;
     showHeartsWithMessage("Hearts replenished!");
     
     playSound(Sound::HeartsReplenished);
@@ -121,10 +103,10 @@ bool isFinishAllowed() {
 void tick() {
     cycle++;
 
-    toggleLights();
-
+    showHeartLights();
+    showRingLights();
+    
     if (checkStartTouch()) {
-        toggleLights();
         playSound(Sound::VoiceStart);
         delay(1800);
         startLevel();
@@ -187,36 +169,15 @@ bool checkWireTouch() {
 
 #pragma region lights
 
-
-void toggleLights() {
-    toggleHeartLights();
-    toggleStartingLights();
-}
-
-void toggleHeartLights() {
-    if (!heartsChanged) {
-        return;
+void showHeartLights() {
+    if (!gameStarted) {
+        showGameNotStarted();
     }
-
-    if (playersHaveErrorCooldown()) {
-        showErrorLights(lastError);
+    else if (playersHaveErrorCooldown()) {
+        showError(lastError);
     }
     else {
-        showHeartLights(playerHeartCount);
-        heartsChanged = false;
-    }
-}
-
-void toggleStartingLights() {
-    digitalWrite(leftLEDPin, LOW);
-    digitalWrite(rightLEDPin, LOW);
- 
-    if (playerTouchesPin(currentButtonLeftPin)) {
-        digitalWrite(leftLEDPin, HIGH);
-    }
-
-    if (playerTouchesPin(currentButtonRightPin)) {
-        digitalWrite(rightLEDPin, HIGH);
+        showHearts(playerHeartCount);
     }
 }
 
