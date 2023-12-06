@@ -48,5 +48,5 @@ void setup() {
 }
 
 void loop() {
-  playGame();
+  tick();
 }

@@ -9,7 +9,8 @@ extern const int errorCooldown;
 extern const int flashsPerError;
 extern const int earliestFinishTime; // milliseconds
 extern const int volume; // 0-30
-
+extern const int pulsesForFullRotation;;
+extern const int motorDelay;
 extern const int lifeLEDsCount;
 
 // debug

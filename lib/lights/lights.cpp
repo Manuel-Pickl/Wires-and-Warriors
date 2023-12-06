@@ -15,7 +15,6 @@ void showHearts(int playerHeartCount) {
 }
 
 void showError(int lastError) {
-
     int elapsedTime = millis() - lastError;
     int intervalTime = errorCooldown / (flashsPerError * 2);
     int currentInterval = elapsedTime / intervalTime;

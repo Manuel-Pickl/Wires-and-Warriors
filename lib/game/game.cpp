@@ -2,15 +2,11 @@
 
 int cycle;
 int gameStart;
-
 int lastError;
 int lastSoundLevelStartSingle = 0;
-
 int level;
-
 int playerHeartCount;
 bool heartsChanged;
-
 bool gameStarted;
 
 void initializeGame() {
@@ -20,20 +16,6 @@ void initializeGame() {
     level = startingLevel;
     playerHeartCount = playerStartingHearts;
     gameStarted = false;
-}
-
-void playGame() {
-    tick();
-    
-    if (gameStarted) {
-        turnBridge();
-        turnMotor(level);
-    }
-}
-
-void showHeartsWithMessage(String message) {
-    String messageWithHearts = message + " (" + playerHeartCount + "/" + playerStartingHearts + ")";
-    log(messageWithHearts);
 }
 
 void setError() {
@@ -63,7 +45,7 @@ void removePlayerHeart() {
         finishGame(false);
     }
     else {
-        showHeartsWithMessage("Heart lost!");
+        logHeartsWithMessage("Heart lost!", playerHeartCount);
     }
 }
 
@@ -71,7 +53,7 @@ void startLevel() {
     log("Level " + String(level) + " started");
 
     playerHeartCount = playerStartingHearts;
-    showHeartsWithMessage("Hearts replenished!");
+    logHeartsWithMessage("Hearts replenished!", playerHeartCount);
     
     playSound(Sound::HeartsReplenished);
     delay(2000); // delay for definite audio finish
@@ -121,6 +103,11 @@ void tick() {
     if (checkEndTouch()) {
         finishLevel();
     }
+
+    if (gameStarted) {
+        turnBridge();
+        turnSides(level);
+    }
 }
 
 #pragma region touch
@@ -167,8 +154,6 @@ bool checkWireTouch() {
 
 #pragma endregion touch
 
-#pragma region lights
-
 void showHeartLights() {
     if (!gameStarted) {
         showGameNotStarted();
@@ -180,5 +165,3 @@ void showHeartLights() {
         showHearts(playerHeartCount);
     }
 }
-
-#pragma endregion lights

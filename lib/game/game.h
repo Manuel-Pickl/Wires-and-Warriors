@@ -20,24 +20,23 @@ extern int playerHeartCount;
 extern bool heartsChanged;
 extern bool gameStarted;
 
+void tick();
 void initializeGame();
-void showHeartsWithMessage(String message);
-void setError();
-bool playersHaveErrorCooldown();
 void finishGame(bool success);
-void removePlayerHeart();
 void startLevel();
 void finishLevel();
+
+void setError();
+bool playersHaveErrorCooldown();
 bool isFinishAllowed();
-void tick();
-void playGame();
+void removePlayerHeart();
+
+void logHeartsWithMessage(String message);
 
 bool checkStartTouch();
 bool checkEndTouch();
 bool checkWireTouch();
 
 void showHeartLights();
-void showHeartLights();
-void showRingLights();
 
 #endif // GAME_H

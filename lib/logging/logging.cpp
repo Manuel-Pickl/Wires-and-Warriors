@@ -7,3 +7,8 @@ void log(String message) {
     
     Serial.println(message);
 }
+
+void logHeartsWithMessage(String message, int playerHeartCount) {
+    String messageWithHearts = message + " (" + playerHeartCount + "/" + playerStartingHearts + ")";
+    log(messageWithHearts);
+}

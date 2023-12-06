@@ -6,5 +6,6 @@
 #include <Arduino.h>
 
 void log(String message);
+void logHeartsWithMessage(String message, int playerHeartCount);
 
 #endif // LOGGING_H

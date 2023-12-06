@@ -1,68 +1,72 @@
 #include "motor.h"
 
-unsigned long lastMotorStepTime = 0;
-unsigned long lastBridgeStepTime = 0;
+long lastBridgeTurnTime = 0;
+long lastMotorTurnTime = 0;
+int tickCounter = 0;
 
-int getMotorSteps(int level) {
+int getMotorRotations(int level) {
     switch (level) {
-        case 1:
-            return 0;
         case 2:
-            return 500;
+            return 1;
         case 3:
-            return 500;
-    }
-}
-
-int getMotorDelay(int level) {
-    switch (level) {
-        case 1:
-            return 0;
-        case 2:
-            return 10000;
-        case 3:
-            return 2000;
-
+            return 3;
         default:
             return 0;
     }
 }
 
-void turnMotor(int level) {
-    unsigned long currentTime = millis();
+bool timeToTurnSides() {
+    long currentTime = millis();
+    long elapsedTime = currentTime - lastMotorTurnTime;
+    bool timeToTurn = elapsedTime >= motorDelay;
 
-    // if (currentTime - lastMotorStepTime >= getMotorDelay(level)) {
-    //     // turn side motors one step
-    //     digitalWrite(stepPinWire, HIGH);
-    //     digitalWrite(stepPinWire, LOW);
+    if (timeToTurn) {
+        lastMotorTurnTime = currentTime;
+    }
 
-    //     // Update the last execution time
-    //     lastMotorStepTime = currentTime;
-    // }
+    return timeToTurn;
 }
 
-int tickCounter = 0;
+bool timeToTurnBridge() {
+    long currentTime = millis();
+    long elapsedTime = currentTime - lastBridgeTurnTime;
+    bool timeToTurn = elapsedTime >= motorDelay;
+
+    if (timeToTurn) {
+        lastBridgeTurnTime = currentTime;
+    }
+
+    return timeToTurn;
+}
+
+void turnSides(int level) {
+    if (!timeToTurnSides()) {
+        return;
+    }
+
+    for (int i = 0; i < getMotorRotations(level); i++) {
+        // turn side motors one step
+        digitalWrite(stepPinWire, HIGH);
+        delayMicroseconds(1);
+        digitalWrite(stepPinWire, LOW);
+    }
+}
 
 void turnBridge() {
-    unsigned long currentTime = millis();
-
-    if (currentTime - lastBridgeStepTime >= 3000) {
-        tickCounter++;
-
-        const int pulsesForFullRotation = 6400;
-        if (tickCounter >= pulsesForFullRotation) {
-            // Toggle the direction of the motor
-            digitalWrite(directionPinBridge, !digitalRead(directionPinBridge));
-
-            // Reset the tick counter
-            tickCounter = 0;
-        }
-
-        // turn bridge motor one step
-        digitalWrite(stepPinBridge, HIGH);
-        digitalWrite(stepPinBridge, LOW);
-
-        // Update the last execution time
-        lastBridgeStepTime = currentTime;
+    if (!timeToTurnBridge()) {
+        return;
     }
+
+    // turn bridge motor one step
+    digitalWrite(stepPinBridge, HIGH);
+    delayMicroseconds(1);
+    digitalWrite(stepPinBridge, LOW);
+    
+    if (tickCounter >= pulsesForFullRotation) {
+        // change bridge rotation
+        digitalWrite(directionPinBridge, !digitalRead(directionPinBridge));
+        tickCounter = 0;
+    }
+
+    tickCounter++;
 }

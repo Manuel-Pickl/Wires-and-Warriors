@@ -3,10 +3,11 @@
 
 #include "../pins/pins.h"
 #include <Arduino.h>
+#include "../gameConstants/gameConstants.h"
 
 int getMotorSteps(int level);
 int getMotorDelay(int level);
-void turnMotor(int level);
+void turnSides(int level);
 void turnBridge();
 
 #endif // MOTOR_H
