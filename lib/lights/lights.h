@@ -17,5 +17,6 @@ void showHearts(int playerHeartCount);
 void showError(int lastError);
 void showFinishLighting(bool success);
 void showRingLights();
+void disableRingLights();
 
 #endif // LIGHTS_H

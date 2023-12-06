@@ -63,3 +63,8 @@ void showRingLights() {
         digitalWrite(rightLEDPin, HIGH);
     }
 }
+
+void disableRingLights() {
+    digitalWrite(leftLEDPin, LOW);
+    digitalWrite(rightLEDPin, LOW);
+}

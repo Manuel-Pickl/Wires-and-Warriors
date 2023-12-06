@@ -1,7 +1,7 @@
 #include "gameConstants.h"
 
 // game
-const int startingLevel = 3;
+const int startingLevel = 1;
 const int endLevel = 3;
 
 const int playerStartingHearts = 6;

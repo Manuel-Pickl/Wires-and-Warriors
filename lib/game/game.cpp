@@ -71,6 +71,7 @@ void finishLevel() {
     }
     else {
         level++;
+        disableRingLights();
         startLevel();
     }
 }
@@ -86,10 +87,14 @@ void tick() {
     cycle++;
 
     showHeartLights();
-    showRingLights();
+
+    if (!gameStarted || isFinishAllowed()) {
+        	showRingLights();
+    }
     
     if (checkStartTouch()) {
         playSound(Sound::VoiceStart);
+        disableRingLights();
         delay(1800);
         startLevel();
     }
