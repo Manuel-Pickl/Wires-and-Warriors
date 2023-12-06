@@ -13,7 +13,7 @@
 
 extern int cycle;
 extern int gameStart;
-extern int lastError;
+extern long long lastError;
 extern int lastSoundLevelStartSingle;
 extern int level;
 extern int playerHeartCount;

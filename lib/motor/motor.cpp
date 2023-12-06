@@ -1,7 +1,7 @@
 #include "motor.h"
 
-long lastBridgeTurnTime = 0;
-long lastMotorTurnTime = 0;
+long long lastBridgeTurnTime = 0;
+long long lastMotorTurnTime = 0;
 int tickCounter = 0;
 
 int getMotorRotations(int level) {
@@ -16,9 +16,9 @@ int getMotorRotations(int level) {
 }
 
 bool timeToTurnSides() {
-    long currentTime = millis();
-    long elapsedTime = currentTime - lastMotorTurnTime;
-    bool timeToTurn = elapsedTime >= motorDelay;
+    long long currentTime = millis();
+    long long elapsedTime = currentTime - lastMotorTurnTime;
+    long long timeToTurn = elapsedTime >= motorDelay;
 
     if (timeToTurn) {
         lastMotorTurnTime = currentTime;
@@ -28,8 +28,8 @@ bool timeToTurnSides() {
 }
 
 bool timeToTurnBridge() {
-    long currentTime = millis();
-    long elapsedTime = currentTime - lastBridgeTurnTime;
+    long long currentTime = millis();
+    long long elapsedTime = currentTime - lastBridgeTurnTime;
     bool timeToTurn = elapsedTime >= motorDelay;
 
     if (timeToTurn) {

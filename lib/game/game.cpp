@@ -2,7 +2,7 @@
 
 int cycle;
 int gameStart;
-int lastError;
+long long lastError;
 int lastSoundLevelStartSingle = 0;
 int level;
 int playerHeartCount;
@@ -24,7 +24,8 @@ void setError() {
 }
 
 bool playersHaveErrorCooldown() {
-    long elapsedTimeSinceError = millis() - lastError;
+    long long currentTime = millis();
+    long long elapsedTimeSinceError = currentTime - lastError;
     return elapsedTimeSinceError < errorCooldown;
 }
 
@@ -56,7 +57,7 @@ void startLevel() {
     logHeartsWithMessage("Hearts replenished!", playerHeartCount);
     
     playSound(Sound::HeartsReplenished);
-    delay(2000); // delay for definite audio finish
+    // delay(2000); // delay for definite audio finish
 
     gameStarted = true;
     gameStart = millis();
