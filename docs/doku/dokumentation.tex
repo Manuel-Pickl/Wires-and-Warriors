@@ -56,8 +56,17 @@
 % 
 % Weitere Pakete
 %
-%\usepackage{listings}			% Darstellung von Quellcode
-%\lstset{language=Python, basicstyle=\ttfamily, numbers=none}
+\usepackage{listings}			% Darstellung von Quellcode
+\lstset{
+  language=C++,                   % C++ als Sprache
+  basicstyle=\ttfamily,           % Schriftart
+  keywordstyle=\color{blue},      % Farbe für keywords
+  % stringstyle=\color{red},
+  frame=single,                         % adds a frame around the code
+  framesep=8pt,                         % adds padding between the frame and the code
+  commentstyle=\color{green},     % Farbe für comments
+  identifierstyle=\color{olive},  % Farbe für Funktionen
+}
 \usepackage{paralist}			% Darstellung von Listen
 \usepackage{float}
 

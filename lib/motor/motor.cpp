@@ -47,7 +47,7 @@ void turnSides(int level) {
     for (int i = 0; i < getMotorRotations(level); i++) {
         // turn side motors one step
         digitalWrite(stepPinWire, HIGH);
-        delayMicroseconds(1);
+        delayMicroseconds(1); // we need the delay
         digitalWrite(stepPinWire, LOW);
     }
 }
