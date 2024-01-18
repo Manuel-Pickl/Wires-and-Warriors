@@ -57,11 +57,13 @@
 % Weitere Pakete
 %
 \usepackage{listings}			% Darstellung von Quellcode
+\renewcommand{\lstlistingname}{Quellcode} % Ändern des Präfixes in den Captions
+\renewcommand{\lstlistlistingname}{Quellcodeverzeichnis} % Ändern des Namens für das Listing-Verzeichnis
+
 \lstset{
   language=C++,                   % C++ als Sprache
   basicstyle=\ttfamily,           % Schriftart
   keywordstyle=\color{blue},      % Farbe für keywords
-  % stringstyle=\color{red},
   frame=single,                         % adds a frame around the code
   framesep=8pt,                         % adds padding between the frame and the code
   commentstyle=\color{green},     % Farbe für comments
@@ -158,9 +160,8 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
   \newpage
 
   \phantomsection
-  \addcontentsline{toc}{chapter}{Tabellenverzeichnis}
-  \listoftables
+  \addcontentsline{toc}{chapter}{Quellcodeverzeichnis}
+  \lstlistoflistings
   \newpage
-  
-  %\include{anhang}
+
 \end{document}  

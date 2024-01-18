@@ -34,13 +34,13 @@ Die Applikation wurde in folgende Hauptkomponenten unterteilt:
 Die main.cpp dient als zentrale Datei der Applikation. Ihre Hauptfunktion besteht darin, verschiedene Services und Module zu initialisieren. Zusätzlich beinhaltet die main.cpp spezifische Funktionen für Arduino, wie:
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}
-void setup() { ... }
-void loop() { ... }
+\begin{lstlisting}[caption={Arduino spezifische Funktionen},captionpos=b]
+void setup() { ... } // run once
+void loop() { ... } // run every tick
 \end{lstlisting}
 \end{minipage}
 
-\subsection{Game}
+\subsection{game}
 
 Die Game-Komponente stellt den umfassendsten Teil der gesamten Applikation dar. Sie beinhaltet die vollständige Logik, die den Zustand (State) und den Ablauf des Spiels bestimmt.
 
@@ -49,15 +49,14 @@ In jedem Zyklus (Tick) des Spiels wird die dazugehörige Funktion der Komponente
 Hier ein vereinfachter Überblick über die Hauptfunktion dieser Komponente:
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}
-// simplified version
+\begin{lstlisting}[caption={Tick Funktion der game Komponente},captionpos=b]
 void tick() {
-    showHeartLights();
+    showHeartLights(); // show the heart lights
 
-    if (checkWireTouch()) { ... }
+    if (checkWireTouch()) { ... } // check for wire touch
     
     if (gameStarted) {
-        turnBridge();
+        turnBridge(); // turn bridge motor
     }
 }
 \end{lstlisting}
@@ -70,7 +69,7 @@ Diese Komponente beinhaltet eine Sammlung von Konstanten, die sowohl für das De
 Nachfolgend finden Sie einen nicht vollständigen Auszug aus dieser Sektion:
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}
+\begin{lstlisting}[caption={Spiel Konstanten},captionpos=b]
 // fixed values
 const int lifeLEDsCount = 6;
 const int pulsesForFullRotation = 6400; // motor specific
@@ -92,11 +91,11 @@ Für die Ansteuerung der Herzen-LEDs wird die Adafruit\_NeoPixel-Bibliothek verw
 Einige der Funktionen der lights-Komponente umfassen:
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}
-void showGameNotStarted() { ... }
-void showHearts(int playerHeartCount) { ... }
-void showError(int lastError) { ... }
-void showRingLights() { ... }
+\begin{lstlisting}[caption={Wichtigste Beleuchtungsfunktionen},captionpos=b]
+void showGameNotStarted() { ... } // show default lights
+void showHearts() { ... } // display red hearts
+void showError() { ... } // show error on wire touch
+void showRingLights() { ... } // show light on ring touch
 \end{lstlisting}
 \end{minipage}    
 
@@ -113,8 +112,9 @@ Außerdem ein wichtiger Bestandteil dieser Komponente sind die Überprüfungsfun
 Als Beispiel für die Funktionalität dieser Komponente dient die Funktion zum Drehen der Turmdrähte:
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}
+\begin{lstlisting}[caption={Code zum Drehen der Turmdrähte},captionpos=b]
 void turnSides(int level) {
+    // check if tower motors should turn
     if (!timeToTurnSides()) {
         return;
     }
@@ -141,8 +141,9 @@ Diese Komponente ist eine unterstützende Funktionseinheit, die speziell für di
 Die Kernfunktion der touch-Komponente nutzt die digitalRead()-Funktion, die von der Arduino-Bibliothek bereitgestellt wird.
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}
+\begin{lstlisting}[caption={Detektion von Benutzerberührung},captionpos=b]
 bool playerTouchesPin(int pin) {
+    // use function from arduino framework
     return !digitalRead(pin);
 }
 \end{lstlisting}
@@ -163,9 +164,9 @@ Diese Methode ermöglicht es, eine Art von Asynchronität zu simulieren. Durch d
 Dieses Vorgehen lässt sich gut am Beispiel der Funktionalität zum Drehen des Brückenmotors illustrieren. Die turnBridge()-Funktion beginnt mit einer Überprüfung, ob eine Drehung der Brücke überhaupt möglich ist. Diese Überprüfung wird durch die Funktion timeToTurnBridge() realisiert, die auf Zeitsteuerung basiert. Es wird kontrolliert, ob die festgelegte Zeitspanne seit dem letzten Aktivieren der Brückendrehung verstrichen ist. Sobald festgestellt wird, dass die definierte Zeitspanne abgelaufen ist, wird der Brückenmotor aktiviert und der Zeitstempel aktualisiert, um den nächsten Zeitpunkt für eine mögliche Aktivierung zu markieren.
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}
-// vereinfachte version
+\begin{lstlisting}[caption={Zeitgesteuertes Drehen des Brückenmotors},captionpos=b]
 void turnBridge() {
+    // leave function of bridge should not be turned
     if (!timeToTurnBridge()) {
         return;
     }
@@ -174,9 +175,11 @@ void turnBridge() {
 }
 
 bool timeToTurnBridge() {
+    // elapsed time is bigger than motor waiting time
     bool timeToTurn = elapsedTime >= motorDelay;
 
     if (timeToTurn) {
+        // update last turn time
         lastBridgeTurnTime = currentTime;
     }
 
